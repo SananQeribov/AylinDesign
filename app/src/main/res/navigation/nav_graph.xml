@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_splashFragment_to_boardingFragment"
             app:destination="@id/boardingFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/boardingFragment"
         android:name="com.legalist.aylindesign.ui.BoardingFragment"
         android:label="fragment_boarding"
         tools:layout="@layout/fragment_boarding" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.legalist.aylindesign.ui.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>

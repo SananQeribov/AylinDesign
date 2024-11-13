@@ -12,15 +12,10 @@ import com.legalist.aylindesign.viewmodel.SplashViewmodel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class SplashFragment : BaseFragment<FragmentSplashBinding>() {
+class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
     private lateinit var viewModel: SplashViewmodel
 
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentSplashBinding {
-        return FragmentSplashBinding.inflate(inflater, container, false)
-    }
+
 
     override fun onResume() {
         super.onResume()
@@ -37,6 +32,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     private fun navigateToFragment() {
-        findNavController().navigate(R.id.boardingFragment)
+        findNavController().navigate(R.id.registerFragment)
     }
 }

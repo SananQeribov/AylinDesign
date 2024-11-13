@@ -12,21 +12,11 @@ import com.legalist.aylindesign.base.BaseFragment
 import com.legalist.aylindesign.databinding.FragmentBoardingBinding
 
 
-class BoardingFragment : BaseFragment<FragmentBoardingBinding>() {
+class BoardingFragment : BaseFragment<FragmentBoardingBinding>(FragmentBoardingBinding::inflate) {
 
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentBoardingBinding {
-        return FragmentBoardingBinding.inflate(inflater, container, false)
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = getViewBinding(inflater, container)
 
+    override fun setupUI() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = CarouselLayoutManager()
         CarouselSnapHelper().attachToRecyclerView(binding.recyclerView)
@@ -40,7 +30,9 @@ class BoardingFragment : BaseFragment<FragmentBoardingBinding>() {
 
         val adapter = CarouselAdapter(imageList)
         binding.recyclerView.adapter = adapter
-
-        return binding.root
     }
+
+
+
+
 }
