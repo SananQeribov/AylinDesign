@@ -30,6 +30,7 @@ class BoardingFragment : BaseFragment<FragmentBoardingBinding>(FragmentBoardingB
 
         val adapter = CarouselAdapter(imageList)
         binding.recyclerView.adapter = adapter
+        navigateTo(binding.button,R.id.loginFragment)
     }
 
 

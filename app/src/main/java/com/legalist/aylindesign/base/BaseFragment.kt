@@ -37,7 +37,7 @@ abstract class BaseFragment<T : ViewBinding>(
     }
 
 
-    protected fun navigateTo(view: TextView, destinationId: Int) {
+   protected fun navigateTo(view: TextView, destinationId: Int) {
         view.setOnClickListener {
             findNavController().navigate(destinationId)
         }
