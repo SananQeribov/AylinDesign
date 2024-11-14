@@ -15,11 +15,14 @@ import com.legalist.data.model.User
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import org.koin.android.ext.android.get
+import org.koin.core.qualifier.named
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     private val registerViewModel: RegisterViewModel by viewModels {
-        RegisterViewModelFactory(UserRepositoryImpl("https://66a8396353c13f22a3d21b48.mockapi.io/api/v1/",requireContext()))
+        //RegisterViewModelFactory(UserRepositoryImpl("https://66a8396353c13f22a3d21b48.mockapi.io/api/v1/",requireContext()))
+        RegisterViewModelFactory(get(named("userRepo")))
     }
 
 

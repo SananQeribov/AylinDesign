@@ -60,5 +60,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Volley api request
     implementation ("com.android.volley:volley:1.2.1")
+    // Koin Dependency injection
+    implementation ("io.insert-koin:koin-android:3.2.0")
 }
