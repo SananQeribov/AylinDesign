@@ -21,9 +21,24 @@
         android:id="@+id/boardingFragment"
         android:name="com.legalist.aylindesign.ui.BoardingFragment"
         android:label="fragment_boarding"
-        tools:layout="@layout/fragment_boarding" />
+        tools:layout="@layout/fragment_boarding" >
+        <action
+            android:id="@+id/action_boardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.legalist.aylindesign.ui.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_boardingFragment"
+            app:destination="@id/boardingFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.legalist.aylindesign.ui.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

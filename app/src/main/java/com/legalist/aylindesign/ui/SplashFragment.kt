@@ -32,6 +32,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     }
 
     private fun navigateToFragment() {
-        findNavController().navigate(R.id.registerFragment)
+        findNavController().navigate(R.id.loginFragment)
     }
 }

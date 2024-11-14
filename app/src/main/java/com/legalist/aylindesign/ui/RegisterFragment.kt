@@ -6,6 +6,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.legalist.aylindesign.R
 import com.legalist.aylindesign.base.BaseFragment
 import com.legalist.aylindesign.databinding.FragmentRegisterBinding
 import com.legalist.aylindesign.viewmodel.RegisterViewModel
@@ -28,6 +30,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         setupPhoneNumberField()
         setupBirthdayField()
 
+        navigateTo(binding.loginLink,R.id.loginFragment)
+
         binding.registerButton.setOnClickListener {
             val currentTimestamp = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
 
@@ -43,9 +47,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 id = ""
             )
             registerViewModel.registerUser(user)
+
         }
 
         observeViewModel()
+
+
     }
 
     private fun setupPhoneNumberField() {

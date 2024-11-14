@@ -43,7 +43,8 @@ android {
 dependencies {
     implementation(project(":common"))
     implementation(project(":data"))
-
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     //viewmodel
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.7")
 //navgation
