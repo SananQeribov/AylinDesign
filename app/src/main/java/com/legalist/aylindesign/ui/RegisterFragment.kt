@@ -10,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import com.legalist.aylindesign.R
 import com.legalist.aylindesign.base.BaseFragment
 import com.legalist.aylindesign.databinding.FragmentRegisterBinding
+import com.legalist.aylindesign.viewmodel.LoginViewModel
 import com.legalist.aylindesign.viewmodel.RegisterViewModel
-import com.legalist.aylindesign.viewmodel.RegisterViewModelFactory
+import com.legalist.common.viewmodels.CommonViewModelFactory
 import com.legalist.data.repository.UserRepositoryImpl
 import com.legalist.data.model.User
+import com.legalist.data.repository.LoginRepositoryImpl
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -22,21 +24,30 @@ import org.koin.core.qualifier.named
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
+    //    private val registerViewModel: RegisterViewModel by viewModels {
+//        //RegisterViewModelFactory(UserRepositoryImpl("https://66a8396353c13f22a3d21b48.mockapi.io/api/v1/",requireContext()))
+//        RegisterViewModelFactory(get(named("userRepo")))
+//    }
     private val registerViewModel: RegisterViewModel by viewModels {
-        //RegisterViewModelFactory(UserRepositoryImpl("https://66a8396353c13f22a3d21b48.mockapi.io/api/v1/",requireContext()))
-        RegisterViewModelFactory(get(named("userRepo")))
+        CommonViewModelFactory {
+            RegisterViewModel(
+                get(named("registerRepo")
+            ))
+        }
     }
-
 
 
     override fun setupUI() {
         setupPhoneNumberField()
         setupBirthdayField()
 
-        navigateTo(binding.loginLink,R.id.loginFragment)
+        navigateTo(binding.loginLink, R.id.loginFragment)
 
         binding.registerButton.setOnClickListener {
-            val currentTimestamp = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
+            val currentTimestamp = SimpleDateFormat(
+                "dd/MM/yyyy",
+                Locale.getDefault()
+            ).format(Calendar.getInstance().time)
 
             val user = User(
                 created = currentTimestamp.toString(),
@@ -62,9 +73,20 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.phoneNumber.addTextChangedListener(object : TextWatcher {
             private var isEditing = false
 
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun beforeTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
 
-            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(
+                charSequence: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
                 val currentText = charSequence.toString()
 
                 if (currentText.startsWith("+994")) {
@@ -94,10 +116,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                binding.birthday.setText(selectedDate)
-            }, year, month, day)
+            val datePickerDialog =
+                DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                    val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                    binding.birthday.setText(selectedDate)
+                }, year, month, day)
 
             datePickerDialog.show()
         }

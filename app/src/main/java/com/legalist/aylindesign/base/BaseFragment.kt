@@ -37,10 +37,14 @@ abstract class BaseFragment<T : ViewBinding>(
     }
 
 
-   protected fun navigateTo(view: TextView, destinationId: Int) {
-        view.setOnClickListener {
-            findNavController().navigate(destinationId)
-        }
+   protected fun navigateTo(view: View? = null, destinationId: Int) {
+       view?.setOnClickListener {
+           // Set listener on the view to navigate to the destinationId
+           findNavController().navigate(destinationId)
+       } ?: run {
+           // Eğer view null ise, doğrudan navigate ile geçiş yap
+           findNavController().navigate(destinationId)
+       }
     }
 
 }

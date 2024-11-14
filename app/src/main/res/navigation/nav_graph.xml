@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_splashFragment_to_boardingFragment"
             app:destination="@id/boardingFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/boardingFragment"
@@ -29,16 +26,13 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.legalist.aylindesign.ui.RegisterFragment"
-        android:label="RegisterFragment" >
-        <action
-            android:id="@+id/action_registerFragment_to_boardingFragment"
-            app:destination="@id/boardingFragment" />
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        android:label="RegisterFragment" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.legalist.aylindesign.ui.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
 </navigation>

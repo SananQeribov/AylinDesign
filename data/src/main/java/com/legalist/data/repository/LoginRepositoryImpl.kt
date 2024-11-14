@@ -7,48 +7,60 @@ import com.legalist.common.utils.hashPasswordWithSalt
 import com.legalist.data.model.Login
 import com.legalist.data.network.VolleySingleton
 import java.io.Console
-
+import android.util.Log
+import com.android.volley.toolbox.JsonArrayRequest
 
 class LoginRepositoryImpl(private val apiUrl: String, private val context: Context) :
     LoginRepository {
+
     override fun LoginUSer(user: Login, onResult: (Boolean, String?) -> Unit) {
         val getUserUrl = "$apiUrl/users?email=${user.email}"
-        val getUserRequest = JsonObjectRequest(
+
+        // Use JsonArrayRequest because the response is an array
+        val getUserRequest = JsonArrayRequest(
             Request.Method.GET, getUserUrl, null,
             { response ->
-                val usersArray = response.optJSONArray("users")
 
-                if (usersArray != null && usersArray.length() > 0) {
-                    for (i in 1..usersArray.length()) {
-                        val existingUser = usersArray.getJSONObject(i)
-                        val existsPasswordSalt = existingUser.optString("salt")
+                Log.d("LoginRepository", "Response: $response")
+
+
+                if (response.length() > 0) {
+
+                    for (i in 0 until response.length()) {
+                        val existingUser = response.getJSONObject(i)
+                        val existsPasswordSalt = existingUser.optString("passwordSalt")
                         val storedHashedPassword = existingUser.optString("password")
+
+
+                        Log.d("LoginRepository", "Existing User Salt: $existsPasswordSalt")
+                        Log.d("LoginRepository", "Stored Hashed Password: $storedHashedPassword")
+
                         val enteredHashedPassword =
                             hashPasswordWithSalt(user.password, existsPasswordSalt)
 
-
+                        // Log the entered hashed password for debugging
+                        Log.d("LoginRepository", "Entered Hashed Password: $enteredHashedPassword")
 
                         if (enteredHashedPassword == storedHashedPassword) {
+                            Log.d("LoginRepository", "Login successful.")
                             onResult(true, "Login successful.")
-                            print("succesfullyo")
-
-                        } else {
-                            onResult(false, "Incorrect password.")
+                            return@JsonArrayRequest
                         }
                     }
-
-
+                    onResult(false, "Incorrect password.")
                 } else {
                     onResult(false, "User not found.")
                 }
             },
             { error ->
-                onResult(false, error.message)
+
+                val errorMessage = error.message ?: "An error occurred"
+                Log.e("LoginRepository", "Error: $errorMessage")
+                onResult(false, errorMessage)
             }
         )
 
+
         VolleySingleton.getInstance(context).addToRequestQueue(getUserRequest)
     }
-
-
 }

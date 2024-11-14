@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
+                android:text="Login"
                 android:textSize="24sp"
                 android:textColor="#333333"
                 android:fontFamily="sans-serif-medium"
@@ -105,7 +105,7 @@
 
             <!-- Already Have an Account? Link -->
             <TextView
-                android:id="@+id/loginLink"
+                android:id="@+id/registerLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Don't have an account? Register"
