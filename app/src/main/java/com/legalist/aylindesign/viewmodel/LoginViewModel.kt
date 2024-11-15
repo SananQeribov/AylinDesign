@@ -24,6 +24,8 @@ class LoginViewModel(
     private val _loginResult = MutableSharedFlow<Pair<Boolean, String>>(replay = 1) // replay 1 ilə sonuncu hadisəni saxlayır
     val loginResult: SharedFlow<Pair<Boolean, String>> get() = _loginResult.asSharedFlow()
      //difference between sharedFlow and stateFlow
+
+
    // private val _loginResult = MutableStateFlow<Pair<Boolean, String>?>(null)  // null ilə başladılır
     //    val loginResult: StateFlow<Pair<Boolean, String>?> get() = _loginResult.asStateFlow()
 
